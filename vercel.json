@@ -1,0 +1,8 @@
+{
+  "buildCommand": "cd silk-ai-frontend && npm run build",
+  "outputDirectory": "silk-ai-frontend/dist",
+  "installCommand": "cd silk-ai-frontend && npm ci",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
