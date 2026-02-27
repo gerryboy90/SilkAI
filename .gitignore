@@ -1,0 +1,31 @@
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+silk-ai-backend/.venv/
+*.egg-info/
+.eggs/
+
+# Node
+node_modules/
+silk-ai-frontend/dist/
+
+# IDE and OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Build and cache
+.pytest_cache/
+.coverage
+htmlcov/
