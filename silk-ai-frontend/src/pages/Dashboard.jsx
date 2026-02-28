@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import { Plus, ChevronRight, FileText, Clock } from 'lucide-react'
 import { toast } from 'react-hot-toast'
 import Layout from '../components/Layout'
@@ -50,7 +51,12 @@ export default function Dashboard() {
     <Layout>
       <div className="max-w-7xl mx-auto px-6 py-12">
         {/* Page header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
+        <motion.div
+          className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <div>
             <div className="section-label mb-2">Dashboard</div>
             <h1 className="font-serif text-4xl font-semibold">
@@ -64,21 +70,26 @@ export default function Dashboard() {
           <Link to="/upload" className="btn-gold flex items-center gap-2 self-start sm:self-auto">
             <Plus size={16} /> Upload brief
           </Link>
-        </div>
+        </motion.div>
 
         {/* Stats row */}
-        <div className="grid grid-cols-3 gap-4 mb-12">
+        <motion.div
+          className="grid grid-cols-3 gap-4 mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+        >
           {[
             { label: 'Total cases', value: stats.total },
             { label: 'Analyses complete', value: stats.complete },
             { label: 'In progress', value: stats.processing },
           ].map(({ label, value }) => (
-            <div key={label} className="glass-panel p-6">
+            <div key={label} className="glass-panel p-6 transition-all duration-400 hover:shadow-[0_0_30px_rgba(201,168,76,0.08)] hover:border-silk-gold/20">
               <div className="font-serif text-3xl font-semibold mb-1">{value}</div>
               <div className="text-silk-grey text-xs font-mono">{label}</div>
             </div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Cases list */}
         <div>
@@ -96,9 +107,17 @@ export default function Dashboard() {
               ))}
             </div>
           ) : cases.length === 0 ? (
-            <div className="py-24 text-center border border-silk-mid/20">
-              <FileText size={32} className="text-silk-mid mx-auto mb-4" />
-              <h3 className="font-serif text-xl font-medium mb-2 text-silk-silver">No analyses yet</h3>
+            <div className="py-24 text-center glass-panel relative overflow-hidden">
+              {/* Glow behind icon */}
+              <div
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full opacity-[0.06]"
+                style={{
+                  background: 'radial-gradient(circle, rgba(201, 168, 76, 0.5) 0%, transparent 70%)',
+                  filter: 'blur(30px)',
+                }}
+              />
+              <FileText size={32} className="text-silk-gold/40 mx-auto mb-4 relative z-10" />
+              <h3 className="font-serif text-xl font-medium mb-2 text-silk-silver relative z-10">No analyses yet</h3>
               <p className="text-silk-grey text-sm mb-8">
                 Drop your brief. Get argument analysis, judge prediction, and strategy — in under 2 minutes.
               </p>
@@ -112,9 +131,10 @@ export default function Dashboard() {
                 <Link
                   key={c.id}
                   to={c.status === 'complete' ? `/cases/${c.id}` : '#'}
-                  className={`group flex items-center justify-between p-5 border border-silk-mid/20 
-                    bg-silk-charcoal hover:bg-silk-dark hover:border-silk-gold/20 
-                    transition-all duration-200 ${c.status !== 'complete' ? 'cursor-default' : ''}`}
+                  className={`group flex items-center justify-between p-5 border border-silk-mid/20
+                    bg-silk-charcoal/60 hover:bg-silk-dark hover:border-silk-gold/20
+                    hover:shadow-[0_0_20px_rgba(201,168,76,0.05)]
+                    transition-all duration-300 ${c.status !== 'complete' ? 'cursor-default' : ''}`}
                 >
                   <div className="flex items-start gap-4 min-w-0">
                     <div className="w-9 h-9 border border-silk-mid/40 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:border-silk-gold/30 transition-colors">

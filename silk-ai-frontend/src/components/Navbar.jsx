@@ -18,10 +18,10 @@ export default function Navbar() {
   ]
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-silk-mid/30 bg-silk-black/90 backdrop-blur-md">
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-silk-gold/10 bg-silk-black/80 backdrop-blur-xl">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link to="/dashboard" className="flex items-center gap-3 group">
-          <div className="w-8 h-8 flex items-center justify-center border border-silk-gold/40 group-hover:border-silk-gold transition-colors duration-200">
+          <div className="w-8 h-8 flex items-center justify-center border border-silk-gold/40 group-hover:border-silk-gold group-hover:shadow-[0_0_15px_rgba(201,168,76,0.2)] transition-all duration-300">
             <span className="gold-text font-serif text-lg font-bold leading-none">S</span>
           </div>
           <span className="font-serif text-xl font-semibold tracking-wide text-silk-cream">
@@ -36,9 +36,9 @@ export default function Navbar() {
               <Link
                 key={to}
                 to={to}
-                className={`flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all duration-200
+                className={`flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all duration-300
                   ${active
-                    ? 'text-silk-gold border-b border-silk-gold'
+                    ? 'text-silk-gold shadow-[0_2px_10px_rgba(201,168,76,0.25)]'
                     : 'text-silk-silver hover:text-silk-cream'
                   }`}
               >

@@ -16,10 +16,14 @@ export default function ScoreBar({ score, max = 10, className = '' }) {
           {score >= 7 ? 'STRONG' : score >= 5 ? 'MODERATE' : 'WEAK'}
         </span>
       </div>
-      <div className="h-1 bg-silk-mid rounded-full overflow-hidden">
+      <div className="h-1.5 bg-silk-mid/50 rounded-full overflow-hidden">
         <div
           className="h-full rounded-full transition-all duration-700 ease-out"
-          style={{ width: `${pct}%`, backgroundColor: color }}
+          style={{
+            width: `${pct}%`,
+            backgroundColor: color,
+            boxShadow: `0 0 8px ${color}40, 0 0 16px ${color}20`,
+          }}
         />
       </div>
     </div>

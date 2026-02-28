@@ -38,6 +38,11 @@ export default {
         'orbit-reverse': 'orbitReverse 35s linear infinite',
         'glow-pulse': 'glowPulse 6s ease-in-out infinite',
         'gradient-drift': 'gradientDrift 20s ease-in-out infinite',
+        'glow-breathe': 'glowBreathe 4s ease-in-out infinite',
+        'shimmer-sweep': 'shimmerSweep 1.5s ease-in-out',
+        sparkle: 'sparkle 2.5s ease-in-out infinite',
+        'scale-in': 'scaleIn 0.5s ease forwards',
+        'spin-slow': 'orbit 60s linear infinite',
       },
       keyframes: {
         fadeUp: {
@@ -77,6 +82,22 @@ export default {
         gradientDrift: {
           '0%, 100%': { backgroundPosition: '0% 50%' },
           '50%': { backgroundPosition: '100% 50%' },
+        },
+        glowBreathe: {
+          '0%, 100%': { opacity: '0.4' },
+          '50%': { opacity: '0.7' },
+        },
+        shimmerSweep: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
+        },
+        sparkle: {
+          '0%, 100%': { opacity: '0', transform: 'scale(0.5) rotate(0deg)' },
+          '50%': { opacity: '1', transform: 'scale(1.2) rotate(180deg)' },
+        },
+        scaleIn: {
+          '0%': { opacity: '0', transform: 'scale(0.95)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
         },
       },
     },
