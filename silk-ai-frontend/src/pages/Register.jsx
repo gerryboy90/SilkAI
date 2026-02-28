@@ -41,11 +41,27 @@ export default function Register() {
   return (
     <div className="min-h-screen bg-silk-black flex">
       {/* Left decorative panel */}
-      <div className="hidden lg:flex lg:w-1/2 flex-col justify-between p-16 border-r border-silk-mid/20 relative overflow-hidden">
-        <AnimatedBackground variant="subtle" />
+      <div className="hidden lg:flex lg:w-1/2 flex-col justify-between p-16 border-r border-silk-gold/10 relative overflow-hidden">
+        <AnimatedBackground variant="hero" />
+
+        {/* Decorative "S" watermark */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none">
+          <div
+            className="font-serif font-bold leading-none opacity-[0.03]"
+            style={{
+              fontSize: '20rem',
+              background: 'linear-gradient(135deg, #C9A84C 0%, #E8C96C 50%, #C9A84C 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
+          >
+            S
+          </div>
+        </div>
 
         <Link to="/" className="flex items-center gap-3 relative z-10">
-          <div className="w-8 h-8 flex items-center justify-center border border-silk-gold/40">
+          <div className="w-8 h-8 flex items-center justify-center border border-silk-gold/40 hover:shadow-[0_0_15px_rgba(201,168,76,0.2)] transition-all duration-300">
             <span className="gold-text font-serif text-lg font-bold leading-none">S</span>
           </div>
           <span className="font-serif text-xl font-semibold">
@@ -76,8 +92,16 @@ export default function Register() {
       </div>
 
       {/* Right form panel */}
-      <div className="w-full lg:w-1/2 flex flex-col justify-center px-8 md:px-16 lg:px-24 py-16">
-        <div className="max-w-sm w-full mx-auto">
+      <div className="w-full lg:w-1/2 flex flex-col justify-center px-8 md:px-16 lg:px-24 py-16 relative overflow-hidden">
+        {/* Subtle radial glow */}
+        <div
+          className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[400px] h-[400px] rounded-full pointer-events-none opacity-[0.04]"
+          style={{
+            background: 'radial-gradient(circle, rgba(201, 168, 76, 0.5) 0%, transparent 70%)',
+            filter: 'blur(80px)',
+          }}
+        />
+        <div className="max-w-sm w-full mx-auto relative z-10">
           <Link to="/" className="flex items-center gap-3 mb-12 lg:hidden">
             <div className="w-7 h-7 flex items-center justify-center border border-silk-gold/40">
               <span className="gold-text font-serif text-base font-bold leading-none">S</span>

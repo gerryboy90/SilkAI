@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDropzone } from 'react-dropzone'
+import { motion } from 'framer-motion'
 import { toast } from 'react-hot-toast'
 import { Upload, FileText, X, ArrowRight, Info } from 'lucide-react'
 import Layout from '../components/Layout'
@@ -81,17 +82,22 @@ export default function UploadCase() {
   return (
     <Layout>
       <div className="max-w-3xl mx-auto px-6 py-12">
-        <div className="mb-10">
+        <motion.div
+          className="mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <div className="section-label mb-2">New case</div>
           <h1 className="font-serif text-4xl font-semibold mb-3">Upload case brief</h1>
           <p className="text-silk-grey text-sm leading-relaxed">
             Brief anonymized, then analyzed. Full strategy report in under 2 minutes.
             Client names and identifiers stay redacted. Always.
           </p>
-        </div>
+        </motion.div>
 
         {/* Anonymization notice */}
-        <div className="flex items-start gap-3 p-4 border border-silk-gold/20 bg-silk-charcoal mb-8">
+        <div className="flex items-start gap-3 p-4 glass-panel mb-8">
           <Info size={15} className="text-silk-gold flex-shrink-0 mt-0.5" />
           <p className="text-silk-silver text-xs leading-relaxed">
             <strong className="text-silk-gold">Privacy:</strong> spaCy NER + Claude verification anonymizes your brief before any AI sees it.
@@ -170,18 +176,28 @@ export default function UploadCase() {
             {!form.brief_raw && (
               <div
                 {...getRootProps()}
-                className={`border-2 border-dashed p-8 text-center cursor-pointer transition-all duration-200 mb-3
+                className={`border-2 border-dashed p-8 text-center cursor-pointer transition-all duration-300 mb-3 relative overflow-hidden
                   ${isDragActive
-                    ? 'border-silk-gold bg-silk-gold/5'
-                    : 'border-silk-mid/40 hover:border-silk-gold/40 hover:bg-silk-charcoal'
+                    ? 'border-silk-gold bg-silk-gold/5 shadow-[0_0_30px_rgba(201,168,76,0.1)]'
+                    : 'border-silk-mid/40 hover:border-silk-gold/40 hover:bg-silk-charcoal/50 hover:shadow-[0_0_20px_rgba(201,168,76,0.05)]'
                   }`}
               >
                 <input {...getInputProps()} />
-                <Upload size={24} className="text-silk-grey mx-auto mb-3" />
-                <p className="text-silk-silver text-sm font-medium">
+                {/* Glow on drag */}
+                {isDragActive && (
+                  <div
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full opacity-[0.1]"
+                    style={{
+                      background: 'radial-gradient(circle, rgba(201, 168, 76, 0.5) 0%, transparent 70%)',
+                      filter: 'blur(40px)',
+                    }}
+                  />
+                )}
+                <Upload size={24} className={`mx-auto mb-3 transition-colors ${isDragActive ? 'text-silk-gold' : 'text-silk-grey'}`} />
+                <p className="text-silk-silver text-sm font-medium relative z-10">
                   {isDragActive ? 'Drop your brief here' : 'Drop a file or click to browse'}
                 </p>
-                <p className="text-silk-grey text-xs mt-1">.txt, .doc, .pdf accepted</p>
+                <p className="text-silk-grey text-xs mt-1 relative z-10">.txt, .doc, .pdf accepted</p>
               </div>
             )}
 

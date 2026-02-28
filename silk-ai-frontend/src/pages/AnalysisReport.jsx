@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import { toast } from 'react-hot-toast'
 import {
   ArrowLeft, Download, Brain, Scale, FileText,
@@ -189,8 +190,24 @@ export default function AnalysisReport() {
           <div className="space-y-6">
             {/* Overall strength gauge */}
             {report.overall_strength != null && (
-              <div className="glass-panel p-6 flex flex-col sm:flex-row sm:items-center gap-6">
-                <div className="flex-shrink-0">
+              <motion.div
+                className="glass-panel p-6 flex flex-col sm:flex-row sm:items-center gap-6 relative overflow-hidden"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                {/* Radial glow behind score */}
+                <div
+                  className="absolute top-1/2 left-8 -translate-y-1/2 w-32 h-32 rounded-full opacity-[0.10]"
+                  style={{
+                    background: `radial-gradient(circle, ${
+                      report.overall_strength >= 7 ? 'rgba(76, 175, 80, 0.5)' :
+                      report.overall_strength >= 5 ? 'rgba(201, 168, 76, 0.5)' : 'rgba(176, 48, 48, 0.5)'
+                    } 0%, transparent 70%)`,
+                    filter: 'blur(30px)',
+                  }}
+                />
+                <div className="flex-shrink-0 relative z-10">
                   <div className="section-label mb-1">Overall argument strength</div>
                   <div className="font-serif text-5xl font-semibold">
                     <span
@@ -204,13 +221,13 @@ export default function AnalysisReport() {
                     <span className="text-silk-grey text-2xl">/10</span>
                   </div>
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 relative z-10">
                   <ScoreBar score={report.overall_strength} />
                   <p className="text-silk-grey text-xs mt-3">
                     Average across {report.argument_scores?.length ?? 0} scored arguments.
                   </p>
                 </div>
-              </div>
+              </motion.div>
             )}
 
             {/* 1. Argument Style */}
@@ -414,7 +431,7 @@ export default function AnalysisReport() {
             </ReportSection>
 
             {/* PDF export CTA */}
-            <div className="glass-panel p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="glass-panel glow-gold p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div>
                 <p className="font-serif text-lg font-semibold">Export your strategy report</p>
                 <p className="text-silk-grey text-sm">Download as formatted PDF for client briefings and court preparation.</p>
@@ -441,13 +458,22 @@ function ReportSection({ icon: Icon, number, title, children, expanded: expanded
   const toggle = onToggle ?? (() => setLocalExpanded(!localExpanded))
 
   return (
-    <div className="glass-panel overflow-hidden">
+    <motion.div
+      className={`glass-panel overflow-hidden transition-all duration-300 ${
+        isExpanded ? 'border-l-2 border-l-silk-gold/40' : ''
+      }`}
+      initial={{ opacity: 0, y: 15 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+    >
       <button
         onClick={toggle}
         className="w-full flex items-center justify-between p-5 hover:bg-silk-charcoal/50 transition-colors duration-200"
       >
         <div className="flex items-center gap-4">
-          <div className="w-9 h-9 border border-silk-gold/20 flex items-center justify-center flex-shrink-0">
+          <div className={`w-9 h-9 border flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
+            isExpanded ? 'border-silk-gold/40 shadow-[0_0_15px_rgba(201,168,76,0.1)]' : 'border-silk-gold/20'
+          }`}>
             <Icon size={16} className="text-silk-gold" />
           </div>
           <div className="text-left">
@@ -466,6 +492,6 @@ function ReportSection({ icon: Icon, number, title, children, expanded: expanded
           {children}
         </div>
       )}
-    </div>
+    </motion.div>
   )
 }
