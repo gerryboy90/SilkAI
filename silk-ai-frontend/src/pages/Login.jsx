@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 import { useAuth } from '../contexts/AuthContext'
 import { Eye, EyeOff, ArrowRight } from 'lucide-react'
+import AnimatedBackground from '../components/AnimatedBackground'
 
 export default function Login() {
   const { login } = useAuth()
@@ -30,10 +31,7 @@ export default function Login() {
     <div className="min-h-screen bg-silk-black flex">
       {/* Left panel — decorative */}
       <div className="hidden lg:flex lg:w-1/2 flex-col justify-between p-16 border-r border-silk-mid/20 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full border border-silk-gold/5" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full border border-silk-gold/8" />
-        </div>
+        <AnimatedBackground variant="subtle" />
 
         <Link to="/" className="flex items-center gap-3 relative z-10">
           <div className="w-8 h-8 flex items-center justify-center border border-silk-gold/40">

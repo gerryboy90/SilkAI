@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, Scale, Brain, FileText, Users, Shield } from 'lucide-react'
+import AnimatedBackground from '../components/AnimatedBackground'
 
 const features = [
   {
@@ -62,15 +63,7 @@ export default function Landing() {
 
       {/* Hero */}
       <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-16">
-        {/* Background geometric accent */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full border border-silk-gold/5" />
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full border border-silk-gold/3" />
-          <div
-            className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-48 opacity-20"
-            style={{ background: 'linear-gradient(180deg, transparent, #C9A84C)' }}
-          />
-        </div>
+        <AnimatedBackground variant="hero" />
 
         <div className="relative z-10 max-w-4xl mx-auto">
           <div className="section-label mb-6 animate-fade-in">Nicrinze Tech Legal Suite</div>

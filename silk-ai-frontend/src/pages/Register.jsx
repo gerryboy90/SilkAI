@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 import { useAuth } from '../contexts/AuthContext'
 import { Eye, EyeOff, ArrowRight } from 'lucide-react'
+import AnimatedBackground from '../components/AnimatedBackground'
 
 export default function Register() {
   const { register } = useAuth()
@@ -41,10 +42,7 @@ export default function Register() {
     <div className="min-h-screen bg-silk-black flex">
       {/* Left decorative panel */}
       <div className="hidden lg:flex lg:w-1/2 flex-col justify-between p-16 border-r border-silk-mid/20 relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 right-0 w-px h-full opacity-10"
-            style={{ background: 'linear-gradient(180deg, transparent, #C9A84C, transparent)' }} />
-        </div>
+        <AnimatedBackground variant="subtle" />
 
         <Link to="/" className="flex items-center gap-3 relative z-10">
           <div className="w-8 h-8 flex items-center justify-center border border-silk-gold/40">

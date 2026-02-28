@@ -29,3 +29,7 @@ silk-ai-frontend/dist/
 .pytest_cache/
 .coverage
 htmlcov/
+
+# Separate projects
+remotion-main-2 copy/
+promo-video/
